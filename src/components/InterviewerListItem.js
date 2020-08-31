@@ -1,9 +1,9 @@
 import React from 'react';
-import "components/InterviewListItem.scss";
+import "components/InterviewerListItem.scss";
 
 const classNames = require('classnames');
 
-export default function InterviewListItem(props) {
+export default function InterviewerListItem(props) {
 
   const interviewClass = classNames(
     'interviewers__item',
