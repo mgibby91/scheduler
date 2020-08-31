@@ -1,6 +1,7 @@
 import React from "react";
 import DayList from 'components/DayList';
 import "components/Application.scss";
+import React from 'react';
 
 const days = [
   {
