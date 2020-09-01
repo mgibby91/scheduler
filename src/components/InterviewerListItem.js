@@ -15,20 +15,20 @@ export default function InterviewerListItem(props) {
     { 'interviewers__item--selected-image': props.selected }
   );
 
-  let interviewName;
+  // let interviewName;
 
-  if (interviewClass === 'interviewers__item interviewers__item--selected') {
-    interviewName = props.name;
-  }
+  // if (interviewClass === 'interviewers__item interviewers__item--selected') {
+  //   interviewName = props.name;
+  // }
 
   return (
-    <li className={interviewClass} onClick={() => props.setInterviewer(props.id)}>
+    <li className={interviewClass} onClick={props.setInterviewer}>
       <img
         className={interviewImgClass}
         src={props.avatar}
         alt={props.name}
       />
-      {interviewName}
+      {props.selected && props.name}
     </li>
   );
 
