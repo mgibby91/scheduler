@@ -1,6 +1,6 @@
 
 
-export default function getAppointmentsForDay(state, day) {
+export function getAppointmentsForDay(state, day) {
 
   if (!state.days.length) return [];
 
@@ -19,5 +19,27 @@ export default function getAppointmentsForDay(state, day) {
   });
 
   return appointments;
+
+}
+
+
+export function getInterview(state, interview) {
+
+  let result = {};
+
+  for (let intObj in state.interviewers) {
+    if (interview && state.interviewers[intObj].id === interview.interviewer) {
+      result.student = interview.student;
+      result.interviewer = state.interviewers[intObj];
+    }
+  }
+
+  console.log('result', result);
+
+  if (!Object.keys(result).length) {
+    return null;
+  }
+
+  return result;
 
 }
