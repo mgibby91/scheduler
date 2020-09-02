@@ -73,6 +73,7 @@ const appointments = [
 export default function Application(props) {
 
   const [days, setDays] = useState([]);
+  const [day, setDay] = useState('Monday')
 
   const appointmentData = appointments.map(appointment => {
     return <Appointment key={appointment.id} {...appointment} />
@@ -82,7 +83,7 @@ export default function Application(props) {
 
   useEffect(() => {
     axios.get(url).then(res => {
-      setDays(res);
+      setDays(res.data);
     })
   }, [])
 
