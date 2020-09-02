@@ -1,6 +1,6 @@
 
 
-export function getAppointmentsForDay(state, day) {
+export default function getAppointmentsForDay(state, day) {
 
   if (!state.days.length) return [];
 
@@ -13,8 +13,6 @@ export function getAppointmentsForDay(state, day) {
   }
 
   if (!filteredAppointments.length) return [];
-
-  console.log(filteredAppointments);
 
   const appointments = filteredAppointments[0].appointments.map(appt => {
     return state.appointments[appt];
