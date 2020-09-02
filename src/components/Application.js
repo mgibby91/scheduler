@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import DayList from 'components/DayList';
 import "components/Application.scss";
 import Appointment from 'components/Appointment/index'
-import { getAppointmentsForDay, getInterview } from '../helpers/selectors';
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from '../helpers/selectors';
 
 const axios = require('axios');
 
@@ -45,6 +45,10 @@ export default function Application(props) {
   }, []);
 
   const apptArray = getAppointmentsForDay(state, state.day);
+
+  // don't know where exactly to be passing down the interviewersArray!
+  const interviewersArray = getInterviewersForDay(state, state.day);
+
   const appointmentData = apptArray.map(appointment => {
     const interview = getInterview(state, appointment.interview)
     return <Appointment
@@ -83,7 +87,9 @@ export default function Application(props) {
       {
         <section className="schedule">
           {appointmentData}
-          <Appointment key="last" time="6pm" />
+          <Appointment key="last" time="6pm"
+            interviewers={interviewersArray}
+          />
         </section>
       }
     </main>
