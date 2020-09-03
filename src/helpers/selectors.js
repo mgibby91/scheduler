@@ -50,7 +50,7 @@ export function getInterviewersForDay(state, day) {
 
   for (let dayObj of state.days) {
     if (day === dayObj.name) {
-      console.log(dayObj)
+      // console.log(dayObj)
       for (let interviewer of dayObj.interviewers) {
         results.push(state.interviewers[interviewer]);
       }

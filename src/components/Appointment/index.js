@@ -22,10 +22,11 @@ export default function Appointment(props) {
       interviewer
     }
 
-    props.bookInterview(interview.interviewer, interview);
+    props.bookInterview(props.id, interview);
+    transition(SHOW);
   }
 
-
+  console.log('interview.student', props.interview)
 
   return (
     <article className='appointment'>
