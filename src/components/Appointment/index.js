@@ -39,13 +39,18 @@ export default function Appointment(props) {
 
     props.cancelInterview(props.id).then(() => {
       transition(EMPTY);
-    })
+    });
 
   }
 
   const confirmDelete = () => {
     transition(CONFIRM);
   }
+
+  const editInterview = () => {
+    transition(CREATE);
+  }
+
 
   return (
     <article className='appointment'>
@@ -58,6 +63,7 @@ export default function Appointment(props) {
           student={props.interview.student}
           interviewer={props.interview.interviewer}
           onDelete={confirmDelete}
+          onEdit={editInterview}
         />
       )}
       {mode === CREATE && (
@@ -65,6 +71,8 @@ export default function Appointment(props) {
           interviewers={props.interviewers}
           onCancel={() => back()}
           onSave={save}
+          name={props.interview ? props.interview.student : ''}
+          interviewer={props.interview ? props.interview.interviewer.id : null}
         />
       )}
       {mode === SAVING && (
