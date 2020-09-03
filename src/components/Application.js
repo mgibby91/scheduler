@@ -49,6 +49,13 @@ export default function Application(props) {
   // don't know where exactly to be passing down the interviewersArray!
   const interviewersArray = getInterviewersForDay(state, state.day);
 
+  console.log('intArray', interviewersArray);
+
+
+  const bookInterview = (id, interview) => {
+    console.log(id, interview);
+  }
+
   const appointmentData = apptArray.map(appointment => {
     const interview = getInterview(state, appointment.interview)
     return <Appointment
@@ -56,8 +63,11 @@ export default function Application(props) {
       id={appointment.id}
       time={appointment.time}
       interview={interview}
+      interviewers={interviewersArray}
+      bookInterview={bookInterview}
     />
   });
+
 
 
   return (
@@ -89,6 +99,7 @@ export default function Application(props) {
           {appointmentData}
           <Appointment key="last" time="6pm"
             interviewers={interviewersArray}
+            bookInterview={bookInterview}
           />
         </section>
       }

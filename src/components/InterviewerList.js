@@ -4,6 +4,8 @@ import InterviewerListItem from './InterviewerListItem'
 
 export default function InterviewerList({ interviewers, interviewer, setInterviewer }) {
 
+  console.log(interviewers);
+
   const interviewerData = interviewers.map(({ id, name, avatar }) => {
     return <InterviewerListItem
       key={id}
@@ -14,6 +16,8 @@ export default function InterviewerList({ interviewers, interviewer, setIntervie
       setInterviewer={() => setInterviewer(id)}
     />
   })
+
+  console.log(interviewerData);
 
   return (
     <section className="interviewers">
