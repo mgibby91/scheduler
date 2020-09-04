@@ -45,12 +45,11 @@ export function getInterview(state, interview) {
 
 export function getInterviewersForDay(state, day) {
 
-
   let results = [];
 
   for (let dayObj of state.days) {
     if (day === dayObj.name) {
-      // console.log(dayObj)
+      console.log('dayObj', dayObj)
       for (let interviewer of dayObj.interviewers) {
         results.push(state.interviewers[interviewer]);
       }
@@ -59,38 +58,36 @@ export function getInterviewersForDay(state, day) {
 
   return results;
 
-  // console.log(results);
+}
 
 
-  // if (!state.days.length) return [];
+export function updateSpotsRemaining(state, appointments) {
 
-  // let filteredAppointments = [];
+  let currentDayObj;
+  for (let day of state.days) {
+    if (day.name === state.day) {
+      currentDayObj = day;
+    }
+  }
 
-  // for (let dayObj of state.days) {
-  //   if (dayObj.name === day) {
-  //     filteredAppointments.push(dayObj)
-  //   }
-  // }
+  const apptsByDay = currentDayObj.appointments;
+  let spotsFilled = 0;
 
-  // if (!filteredAppointments.length) return [];
+  for (let appt of apptsByDay) {
+    if (appointments[appt].interview) {
+      spotsFilled++;
+    }
+  }
 
-  // // console.log('filteredappts', filteredAppointments);
+  let days = [];
 
-  // const interviewers = filteredAppointments[0].appointments.map(appt => {
+  for (let day of state.days) {
+    if (day.name === state.day) {
+      day.spots = 5 - spotsFilled;
+    }
+    days.push(day);
+  }
 
-  //   for (let interviewerName in state.interviewers) {
-  //     console.log(state.appointments[appt])
-  //     if (state.interviewers[interviewerName].id === state.appointments[appt].interview.interviewer) {
-  //       return state.interviewers[interviewerName];
-  //     }
-  //   }
-
-  //   // return state.appointments[appt];
-  // });
-
-  // // console.log('interviewers', interviewers)
-
-  // return interviewers;
-
+  return days;
 
 }

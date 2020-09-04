@@ -1,118 +1,116 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import DayList from 'components/DayList';
 import "components/Application.scss";
-import Appointment from 'components/Appointment/index'
+import Appointment from 'components/Appointment/index';
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from '../helpers/selectors';
+import useApplicationData from '../hooks/useApplicationData';
 
 const axios = require('axios');
 
-
 export default function Application(props) {
 
-  // const [days, setDays] = useState([]);
-  // const [day, setDay] = useState('Monday')
-  // const [appointments, setAppointments] = useState({});
+  const {
+    state,
+    setDay,
+    bookInterview,
+    cancelInterview
+  } = useApplicationData();
 
-  const [state, setState] = useState({
-    day: 'Monday',
-    days: [],
-    appointments: {},
-    interviewers: {}
-  });
+  console.log('state', state)
 
-  const setDay = day => setState({ ...state, day })
-  // const setDays = days => setState(prev => ({ ...prev, days }));
+  // const [state, setState] = useState({
+  //   day: 'Monday',
+  //   days: [],
+  //   appointments: {},
+  //   interviewers: {}
+  // });
 
-  useEffect(() => {
+  // const setDay = day => setState({ ...state, day })
+  // // const setDays = days => setState(prev => ({ ...prev, days }));
 
-    const promiseDays = axios.get('/api/days');
-    const promiseAppointments = axios.get('/api/appointments');
-    const promiseInterviewers = axios.get('/api/interviewers');
+  // useEffect(() => {
 
-    Promise.all([promiseDays, promiseAppointments, promiseInterviewers]).then((all) => {
-      let [days, appointments, interviewers] = all;
+  //   const promiseDays = axios.get('/api/days');
+  //   const promiseAppointments = axios.get('/api/appointments');
+  //   const promiseInterviewers = axios.get('/api/interviewers');
 
-      days = days.data;
-      appointments = appointments.data;
-      interviewers = interviewers.data;
+  //   Promise.all([promiseDays, promiseAppointments, promiseInterviewers]).then((all) => {
+  //     let [days, appointments, interviewers] = all;
 
-      console.log('days', days);
-      console.log('appointments', appointments);
-      console.log('interviewers', interviewers);
+  //     days = days.data;
+  //     appointments = appointments.data;
+  //     interviewers = interviewers.data;
 
-      setState(prev => ({ ...prev, days, appointments, interviewers }));
-    })
-  }, []);
+  //     console.log('days', days);
+  //     console.log('appointments', appointments);
+  //     console.log('interviewers', interviewers);
+
+  //     setState(prev => ({ ...prev, days, appointments, interviewers }));
+  //   })
+  // }, []);
 
   const apptArray = getAppointmentsForDay(state, state.day);
-
-  // don't know where exactly to be passing down the interviewersArray!
   const interviewersArray = getInterviewersForDay(state, state.day);
 
-  const bookInterview = (id, interview) => {
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview }
-    };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
+  // const bookInterview = (id, interview) => {
+  //   const appointment = {
+  //     ...state.appointments[id],
+  //     interview: { ...interview }
+  //   };
+  //   const appointments = {
+  //     ...state.appointments,
+  //     [id]: appointment
+  //   };
 
-    console.log('appointment', appointment);
-    console.log('appointments', appointments);
-
-
-    setState({
-      ...state,
-      appointments
-    })
-
-    return axios.put(`/api/appointments/${id}`, { interview })
-      .then(res => {
-        console.log('PUT res', res);
-        setState({
-          ...state,
-          appointments
-        })
-      })
-  }
+  //   console.log('appointment', appointment);
+  //   console.log('appointments', appointments);
 
 
-  const cancelInterview = (id) => {
+  //   setState({
+  //     ...state,
+  //     appointments
+  //   })
 
-    const appointment = {
-      ...state.appointments[id],
-      interview: null
-    };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
+  //   return axios.put(`/api/appointments/${id}`, { interview })
+  //     .then(res => {
+  //       console.log('PUT res', res);
+  //       setState({
+  //         ...state,
+  //         appointments
+  //       })
+  //     })
+  // }
 
-    console.log('appointment', appointment);
-    console.log('appointments', appointments);
 
-    // setState({
-    //   ...state,
-    //   appointments
-    // })
+  // const cancelInterview = (id) => {
 
-    return axios.delete(`/api/appointments/${id}`)
-      .then(res => {
-        console.log('DELETE res', res);
-        setState({
-          ...state,
-          appointments
-        })
-      })
+  //   const appointment = {
+  //     ...state.appointments[id],
+  //     interview: null
+  //   };
+  //   const appointments = {
+  //     ...state.appointments,
+  //     [id]: appointment
+  //   };
 
-  }
+  //   console.log('appointment', appointment);
+  //   console.log('appointments', appointments);
+
+  //   return axios.delete(`/api/appointments/${id}`)
+  //     .then(res => {
+  //       console.log('DELETE res', res);
+  //       setState({
+  //         ...state,
+  //         appointments
+  //       })
+  //     })
+
+  // }
 
   // axios.get('/api/debug/reset').then(res => console.log(res));
 
   const appointmentData = apptArray.map(appointment => {
-    const interview = getInterview(state, appointment.interview)
+    const interview = getInterview(state, appointment.interview);
     return <Appointment
       key={appointment.id}
       id={appointment.id}
@@ -153,7 +151,7 @@ export default function Application(props) {
       {
         <section className="schedule">
           {appointmentData}
-          <Appointment key="last" time="6pm"
+          <Appointment key="last" time="5pm"
             interviewers={interviewersArray}
             bookInterview={bookInterview}
           />
