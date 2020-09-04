@@ -60,6 +60,8 @@ export default function Appointment(props) {
   }
 
 
+  console.log('student', props.interview)
+
   return (
     <article className='appointment'>
       <Header
