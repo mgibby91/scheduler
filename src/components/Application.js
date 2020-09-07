@@ -51,6 +51,7 @@ export default function Application(props) {
 
   const apptArray = getAppointmentsForDay(state, state.day);
   const interviewersArray = getInterviewersForDay(state, state.day);
+  console.log('interviewersArray', interviewersArray);
 
   // const bookInterview = (id, interview) => {
   //   const appointment = {
