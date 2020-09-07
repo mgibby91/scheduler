@@ -37,6 +37,7 @@ export default function useApplicationData() {
 
 
   const bookInterview = (id, interview) => {
+
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -83,7 +84,6 @@ export default function useApplicationData() {
         });
 
       })
-
 
   }
 
