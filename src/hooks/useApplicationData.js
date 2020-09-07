@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { updateSpotsRemaining } from '../helpers/selectors';
 
-const axios = require('axios');
+// const axios = require('axios');
+import axios from 'axios';
 
 export default function useApplicationData() {
 
