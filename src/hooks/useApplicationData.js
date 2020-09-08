@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { updateSpotsRemaining } from '../helpers/selectors';
 
-// const axios = require('axios');
 import axios from 'axios';
 
 export default function useApplicationData() {
@@ -27,10 +26,6 @@ export default function useApplicationData() {
       days = days.data;
       appointments = appointments.data;
       interviewers = interviewers.data;
-
-      console.log('days', days);
-      console.log('appointments', appointments);
-      console.log('interviewers', interviewers);
 
       setState(prev => ({ ...prev, days, appointments, interviewers }));
     })

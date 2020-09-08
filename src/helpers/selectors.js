@@ -70,11 +70,11 @@ export function updateSpotsRemaining(state, appointments) {
   }
 
   const apptsByDay = currentDayObj.appointments;
-  let spotsFilled = 0;
+  let spotsRemaining = 0;
 
   for (let appt of apptsByDay) {
-    if (appointments[appt].interview) {
-      spotsFilled++;
+    if (!appointments[appt].interview) {
+      spotsRemaining++;
     }
   }
 
@@ -82,7 +82,7 @@ export function updateSpotsRemaining(state, appointments) {
 
   for (let day of state.days) {
     if (day.name === state.day) {
-      day.spots = 5 - spotsFilled;
+      day.spots = spotsRemaining;
     }
     days.push(day);
   }
