@@ -28,7 +28,7 @@ export default function Appointment(props) {
     const interview = {
       student: name,
       interviewer
-    }
+    };
 
     transition(SAVING, true);
 
@@ -44,8 +44,7 @@ export default function Appointment(props) {
 
     props.cancelInterview(props.id).then(() => {
       transition(EMPTY);
-    }).catch((err) => {
-      console.log('ERROR!!', err)
+    }).catch(() => {
       transition(ERROR_DELETE, true);
     })
 
