@@ -1,5 +1,7 @@
 # Interview Scheduler
 
+This project is a full-stack web application created for the Lighthouse Labs Web Development Bootcamp. The main goal of Interview Scheduler was to learn and practice using React to build an interactive UI in conjunction with a server and database. 
+
 ## Setup
 
 Install dependencies with `npm install`.
@@ -21,3 +23,9 @@ npm test
 ```sh
 npm run storybook
 ```
+
+## Final Product
+
+
+
+
